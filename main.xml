@@ -1,0 +1,122 @@
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/ 
+                   ..\FrameXML\UI.xsd">
+    <Script file="main.lua"></Script>
+
+    <Frame hidden="true" name="killingblow_pvp_mainFrame">
+        <Anchors>
+            <Anchor point="TOP">
+                <Offset>
+                    <AbsDimension x="0" y="-30" />
+                </Offset>
+            </Anchor>
+        </Anchors>
+        <Size>
+            <AbsDimension x="300" y="300"/>
+        </Size>
+        <Backdrop bgFile="Interface\AddOns\KillingBlow_PvP\textures\alliance.tga"></Backdrop>
+        <Scripts>
+            <OnLoad function="registerAddonEvents"/>
+            <OnUpdate function="handleUpdate"/>
+            <OnEvent function="handleEvent"/>
+        </Scripts>
+    </Frame>
+
+    <Frame parent="UIParent" name="killingblow_pvp_killCount" enableMouse="true" movable="true">
+        <Scripts>
+            <OnMouseDown>
+                if ((button == "LeftButton") and (not self.isMoving)) then
+                    self:StartMoving();
+                    self.isMoving = true;
+                end
+            </OnMouseDown>
+            <OnMouseUp>
+                if ((button == "LeftButton") and (self.isMoving)) then
+                    self:StopMovingOrSizing();
+                    self.isMoving = false;
+                end
+            </OnMouseUp>
+            <OnHide>
+                if (self.isMoving) then
+                    self:StopMovingOrSizing();
+                    self.isMoving = false;
+                end
+            </OnHide>
+        </Scripts>
+        <Anchors>
+            <Anchor>
+                <Offset point="TOPLEFT">
+                    <AbsDimension x="0" y="-10"/>
+                </Offset>
+            </Anchor>
+        </Anchors>
+        <Size>
+            <AbsDimension x="120" y="80"/>
+        </Size>
+        <Layers>
+            <Layer>
+                <Texture>
+                    <Size x="100" y="100" />
+                    <Color r="0" g="0" b="0" a="0.5" />
+                </Texture> 
+                <FontString name="killingblow_pvp_killDisplay" text="0" inherits="GameFontNormalLarge2">
+                    <Size x="200" y="30"/>
+                    <Color r=".9" g=".9" b=".1" a=".8"/>
+                    <Anchors>
+                        <Anchor relativeTo="killingblow_pvp_killCount" point="CENTER">
+                            <Offset>
+                                <AbsDimension x="0" y="-5" />
+                            </Offset>
+                             <Shadow>
+                                <Offset>
+                                    <AbsDimension x="0" y="0"/>
+                                </Offset>
+                                <Color r=".4" g=".4" b=".4" a=".75"/>
+                            </Shadow>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Frames>
+            <Frame name="killingblow_pvp_killCountHeader">
+                <Size>
+                    <AbsDimension x="120" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOP">
+                        <Offset>
+                            <AbsDimension x="0" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <Texture name="killingblow_pvp_barTitle">
+                            <Size x="120" y="20"/>
+                            <Color r=".1" g=".1" b=".1" a="1"/>
+                        </Texture>
+                        <FontString justifyV="TOP" text="Kill Count: Total" inherits="GameFontNormal">
+                            <Size x="200" y="30"/>
+                            <Anchors>
+                                <Anchor point="TOP">
+                                    <Offset y="-2.5"/>
+                                </Anchor>          
+                            </Anchors>
+                            <Color r=".9" g=".9" b=".9" a="1"/>
+                            <Shadow>
+                                <Offset>
+                                    <AbsDimension x="1" y="-1"/>
+                                </Offset>
+                                <Color r="0" g="0" b="0" a="0.8"/>
+                            </Shadow>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Frame>
+        </Frames>
+    </Frame> 
+</Ui>
