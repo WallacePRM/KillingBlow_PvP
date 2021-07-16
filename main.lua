@@ -2,11 +2,13 @@
 killingblow_pvp_onlyPlayer = true
 killingblow_pvp_frameVisible = false
 killingblow_pvp_count = 0
+killingblow_pvp_bgFile = {bgFile = 'Interface\\AddOns\\KillingBlow_PvP\\textures\\horde.tga'}
 
 local totalSeconds = 0
 local frameAlpha = 1
 
 function registerAddonEvents()
+
     killingblow_pvp_mainFrame:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
     killingblow_pvp_mainFrame:RegisterEvent('PLAYER_ENTERING_WORLD')
     killingblow_pvp_mainFrame:RegisterEvent('PLAYER_ENTERING_BATTLEGROUND')
@@ -17,7 +19,6 @@ function handleEvent(self, event, ...)
     if (event == 'PLAYER_ENTERING_WORLD') then
 
         local instanceType = select(2, GetInstanceInfo())
-
         if (instanceType == 'none') then
 
             resetKillingBlow()
@@ -38,7 +39,6 @@ function handleEvent(self, event, ...)
 
         local combatEvent = select(2, CombatLogGetCurrentEventInfo())
         local unitDead = combatEvent == 'PARTY_KILL'
-
         if (unitDead == false) then
 
             return
@@ -47,18 +47,17 @@ function handleEvent(self, event, ...)
         local sourceGUID = select(4, CombatLogGetCurrentEventInfo())
         local playerGUID = UnitGUID("player")
         local name = select(6, GetPlayerInfoByGUID(playerGUID))
-        local source = select(6, GetPlayerInfoByGUID(sourceGUID))
-        
-        local playerKill = name == source
 
+        local source = select(6, GetPlayerInfoByGUID(sourceGUID))
+        local playerKill = name == source
         if (playerKill == false) then
 
             return
         end
 
-        local destGuid = select(8, CombatLogGetCurrentEventInfo())
         local playerName = nil
-        
+
+        local destGuid = select(8, CombatLogGetCurrentEventInfo())
         if (destGuid ~= nil) then
 
             playerName = select(6, GetPlayerInfoByGUID(destGuid))
@@ -71,11 +70,11 @@ function handleEvent(self, event, ...)
 
         if (factionName == 'Horde') then
 
-            killingblow_pvp_mainFrame:SetBackdrop({
+            killingblow_pvp_mainFrame_bg:SetBackdrop({
                 bgFile = 'Interface\\AddOns\\KillingBlow_PvP\\textures\\horde.tga'
             })
         else
-            killingblow_pvp_mainFrame:SetBackdrop({
+            killingblow_pvp_mainFrame_bg:SetBackdrop({
                 bgFile = 'Interface\\AddOns\\KillingBlow_PvP\\textures\\alliance.tga'
             })
         end
@@ -106,7 +105,7 @@ function handleUpdate(self, elapsed)
 
         if (frameAlpha >= 0) then
 
-            killingblow_pvp_mainFrame:SetAlpha(frameAlpha)
+            killingblow_pvp_mainFrame_bg:SetAlpha(frameAlpha)
         end
 
         if (totalSeconds > expectedSeconds) then
@@ -115,27 +114,27 @@ function handleUpdate(self, elapsed)
             frameAlpha = 1 
             killingblow_pvp_frameVisible = false
 
-            killingblow_pvp_mainFrame:Hide()
+            killingblow_pvp_mainFrame_bg:Hide()
         end
     end
 end
 
 function killingBlow()
 
-     -- Adicionar um som na morte
+    -- Adicionar um som na morte
 
-     PlaySoundFile('Interface\\AddOns\\KillingBlow_PvP\\sounds\\heroism_track.mp3')
+    PlaySoundFile('Interface\\AddOns\\KillingBlow_PvP\\sounds\\heroism_track.mp3')
 
-     -- Deixar o Frame visivel
+    -- Deixar o Frame visivel
 
-     killingblow_pvp_mainFrame:Show()
+    killingblow_pvp_mainFrame_bg:Show()
 
-     killingblow_pvp_frameVisible = true
-     killingblow_pvp_count = killingblow_pvp_count + 1
+    killingblow_pvp_frameVisible = true
+    killingblow_pvp_count = killingblow_pvp_count + 1
 
-     killingblow_pvp_killDisplay:SetText(killingblow_pvp_count)
+    killingblow_pvp_killDisplay:SetText(killingblow_pvp_count)
 
-     print('|cffe2c123KillingBlow_PvP|r: ' .. killingblow_pvp_count)
+    print('|cffe2c123KillingBlow_PvP|r: ' .. killingblow_pvp_count)
 end
 
 function resetKillingBlow()

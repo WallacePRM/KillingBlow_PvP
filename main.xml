@@ -5,18 +5,28 @@
                    ..\FrameXML\UI.xsd">
     <Script file="main.lua"></Script>
 
-    <Frame hidden="true" name="killingblow_pvp_mainFrame">
+    <Frame name="killingblow_pvp_mainFrame">
+        <Frames>
+            <Frame hidden="true" name="killingblow_pvp_mainFrame_bg" parent="UIParent" inherits="BackdropTemplate">
+                <KeyValues>
+                    <KeyValue key="backdropInfo" value="killingblow_pvp_bgFile" type="global"/>
+                    <KeyValue key="backdropBorderColor" value="LEGENDARY_ORANGE_COLOR" type="global"/>
+                    <KeyValue key="backdropBorderColorAlpha" value="0.25" type="number"/>
+                </KeyValues>
+                <Size x="300" y="300"/>
+                <Anchors>
+                    <Anchor point="TOP">
+                        <Offset>
+                            <AbsDimension x="0" y="-30" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Frame>
+        </Frames>
+        <Size x="300" y="300"/>
         <Anchors>
-            <Anchor point="TOP">
-                <Offset>
-                    <AbsDimension x="0" y="-30" />
-                </Offset>
-            </Anchor>
+            <Anchor point="CENTER"/>
         </Anchors>
-        <Size>
-            <AbsDimension x="300" y="300"/>
-        </Size>
-        <Backdrop bgFile="Interface\AddOns\KillingBlow_PvP\textures\alliance.tga"></Backdrop>
         <Scripts>
             <OnLoad function="registerAddonEvents"/>
             <OnUpdate function="handleUpdate"/>
