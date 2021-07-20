@@ -5,19 +5,21 @@
                    ..\FrameXML\UI.xsd">
     <Script file="main.lua"></Script>
 
+    <Font name="ArtifactAppearanceSetNormalFont" justifyH="CENTER" inherits="GameFontNormal" virtual="true"/>
+
     <Frame name="killingblow_pvp_mainFrame">
         <Frames>
             <Frame hidden="true" name="killingblow_pvp_mainFrame_bg" parent="UIParent" inherits="BackdropTemplate">
                 <KeyValues>
                     <KeyValue key="backdropInfo" value="killingblow_pvp_bgFile" type="global"/>
                     <KeyValue key="backdropBorderColor" value="LEGENDARY_ORANGE_COLOR" type="global"/>
-                    <KeyValue key="backdropBorderColorAlpha" value="0.25" type="number"/>
+                    <KeyValue key="backdropBorderColorAlpha" value=".25" type="number"/>
                 </KeyValues>
                 <Size x="300" y="300"/>
                 <Anchors>
                     <Anchor point="TOP">
                         <Offset>
-                            <AbsDimension x="0" y="-30" />
+                            <AbsDimension x="0" y="-60"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -63,13 +65,13 @@
             </Anchor>
         </Anchors>
         <Size>
-            <AbsDimension x="120" y="80"/>
+            <AbsDimension x="140" y="80"/>
         </Size>
         <Layers>
             <Layer>
                 <Texture>
                     <Size x="100" y="100" />
-                    <Color r="0" g="0" b="0" a="0.5" />
+                    <Color r="0" g="0" b="0" a="0.3" />
                 </Texture> 
                 <FontString name="killingblow_pvp_killDisplay" text="0" inherits="GameFontNormalLarge2">
                     <Size x="200" y="30"/>
@@ -94,7 +96,7 @@
         <Frames>
             <Frame name="killingblow_pvp_killCountHeader">
                 <Size>
-                    <AbsDimension x="120" y="20"/>
+                    <AbsDimension x="140" y="17"/>
                 </Size>
                 <Anchors>
                     <Anchor point="TOP">
@@ -107,13 +109,13 @@
                     <Layer>
                         <Texture name="killingblow_pvp_barTitle">
                             <Size x="120" y="20"/>
-                            <Color r=".1" g=".1" b=".1" a="1"/>
+                            <Color r="0" g="0" b="0" a=".3"/>
                         </Texture>
-                        <FontString justifyV="TOP" text="Kill Count: Total" inherits="GameFontNormal">
-                            <Size x="200" y="30"/>
+                        <FontString justifyV="TOP" text="Kill count" inherits="ArtifactAppearanceSetNormalFont">
+                            <Size x="130" y="30"/>
                             <Anchors>
                                 <Anchor point="TOP">
-                                    <Offset y="-2.5"/>
+                                    <Offset y="-1"/>
                                 </Anchor>          
                             </Anchors>
                             <Color r=".9" g=".9" b=".9" a="1"/>
@@ -124,9 +126,15 @@
                                 <Color r="0" g="0" b="0" a="0.8"/>
                             </Shadow>
                         </FontString>
+                        <Button name="MyAddon_Button">
+                            <Anchors>
+                                <Anchor point="CENTER"/>
+                            </Anchors>
+                        </Button>
                     </Layer>
                 </Layers>
             </Frame>
         </Frames>
     </Frame> 
+
 </Ui>
