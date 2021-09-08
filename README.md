@@ -1,4 +1,4 @@
 # KillingBlow_PvP
 Addon for World of Warcraft
 
-How to plug in:
+Download the zip file and copy to the addon folder
