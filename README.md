@@ -5,4 +5,5 @@ Addon for World of Warcraft
 
 2- Download the zip file 
 
-3- Extract the zip file to the addon folder
+3- Extract the zip file to the addon folder </br>
+(...\Battle.net\World of Warcraft\_retail_\Interface\AddOns)
